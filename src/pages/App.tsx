@@ -1,11 +1,11 @@
-import React from "react";
-import { Router, BrowserRouter, Route, Routes } from "react-router-dom";
+import React from 'react';
+import { Router, BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import Home from "@pages/Home";
-import About from "@pages/About";
+import Home from '@pages/Home';
+import About from '@pages/About';
 
-import png from "@assets/shop.png";
-import "@utils/index";
+import png from '@assets/shop.png';
+import '@utils/index';
 
 interface IAppProps {
   test?: string;

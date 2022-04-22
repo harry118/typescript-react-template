@@ -1,17 +1,15 @@
+import React from 'react';
+
 import Home from '@pages/Home';
 import About from '@pages/About';
-import { IRouteConfig } from '@typings/index';
-
-/* <>
-  <img src={png} alt="png" />
-  <p>react app</p>
-  <Routes>
-    <Route path={`/`} element={<Home />}></Route>
-    <Route path={`/about`} element={<About />}></Route>
-  </Routes>
-</>; */
 
 /** 路由配置 */
+export interface IRouteConfig {
+  path: string;
+  name: string;
+  element: React.ElementType;
+}
+
 const routes: IRouteConfig[] = [
   {
     path: '/',

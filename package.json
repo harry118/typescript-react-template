@@ -7,7 +7,7 @@
   "author": "guoxiangwen",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node  scripts/start.ts",
+    "start": "ts-node scripts/start.ts",
     "build:dev": "cross-env ENV=dev ts-node scripts/build.ts",
     "build:test": "cross-env ENV=test ts-node scripts/build.ts",
     "build:uat": "cross-env ENV=uat ts-node scripts/build.ts",

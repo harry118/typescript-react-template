@@ -1,3 +1,8 @@
 /node_modules
 /scripts/
 .husky/*
+config/**/*
+public/*
+src/__tests__
+src/types
+src/*.d.ts

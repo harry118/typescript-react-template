@@ -1,14 +1,14 @@
-process.env.NODE_ENV = "production";
+process.env.NODE_ENV = 'production';
 
-import chalk from "chalk";
-import cp from "child_process";
-import fs from "fs-extra";
-import rimraf from "rimraf";
-import SpeedMeasureWebpackPlugin from "speed-measure-webpack-plugin";
-import webpack from "webpack";
-import { ENV, Env } from "../config/env";
-import { BUILD_PATH, PUBLIC_FOLDER, ROOT, TEMPLATE_FILE } from "../config/path";
-import config from "../config/webpack.config";
+import chalk from 'chalk';
+import cp from 'child_process';
+import fs from 'fs-extra';
+import rimraf from 'rimraf';
+import SpeedMeasureWebpackPlugin from 'speed-measure-webpack-plugin';
+import webpack from 'webpack';
+import { ENV, Env } from '../config/env';
+import { BUILD_PATH, PUBLIC_FOLDER, ROOT, TEMPLATE_FILE } from '../config/path';
+import config from '../config/webpack.config';
 
 const { execSync } = cp;
 const envLog = (str: string) => console.log(chalk.yellow.bold(str));
@@ -16,10 +16,10 @@ const smp = new SpeedMeasureWebpackPlugin();
 const withSMPConfig = (configuration: webpack.Configuration) =>
   Boolean(process.env.SMP_ENABLE) ? smp.wrap(configuration) : configuration;
 
-envLog("\nWebpack is building...\n");
-envLog(`${execSync("git --version")}`.replace("\n", ""));
+envLog('\nWebpack is building...\n');
+envLog(`${execSync('git --version')}`.replace('\n', ''));
 envLog(`Work directory: ${process.cwd()}`);
-envLog(`NPM: ${execSync("npm -v")}`.replace("\n", ""));
+envLog(`NPM: ${execSync('npm -v')}`.replace('\n', ''));
 envLog(`Node: ${process.version}`);
 envLog(`ENV: ${process.env.ENV}`);
 envLog(`NODE_ENV: ${process.env.NODE_ENV}`);
