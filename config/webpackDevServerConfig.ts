@@ -1,4 +1,4 @@
-import { PUBLIC_FOLDER } from './path';
+import { appBuild } from './path';
 import genEnv, { Env } from './env';
 import wds from 'webpack-dev-server';
 
@@ -8,7 +8,7 @@ const { PUBLIC_URL, PORT } = genEnv('local');
 export default {
   allowedHosts: 'all',
   client: { logging: 'error', progress: true, overlay: true },
-  // contentBase: PUBLIC_FOLDER,
+  // contentBase: appBuild,
   historyApiFallback: true,
   port: Number(PORT),
   hot: true,

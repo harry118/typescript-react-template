@@ -7,7 +7,7 @@ import rimraf from 'rimraf';
 import SpeedMeasureWebpackPlugin from 'speed-measure-webpack-plugin';
 import webpack from 'webpack';
 import { ENV, Env } from '../config/env';
-import { BUILD_PATH, PUBLIC_FOLDER, ROOT, TEMPLATE_FILE } from '../config/path';
+import { appBuild, appPublic, ROOT, appHtml } from '../config/path';
 import config from '../config/webpack.config';
 
 const { execSync } = cp;
@@ -39,7 +39,7 @@ const runBuild = (env: Env) =>
     }
   });
 
-rimraf(`${BUILD_PATH}/*`, async () => {
+rimraf(`${appBuild}/*`, async () => {
   const start = Date.now();
   const envs = ENV.slice();
   const total = envs.length;
@@ -72,9 +72,9 @@ rimraf(`${BUILD_PATH}/*`, async () => {
       });
 
     // copy public files
-    fs.copySync(PUBLIC_FOLDER, `${BUILD_PATH}`, {
+    fs.copySync(appPublic, `${appBuild}`, {
       dereference: true,
-      filter: (file) => ![TEMPLATE_FILE].includes(file),
+      filter: (file) => ![appHtml].includes(file),
     });
     env = envs.shift();
   }

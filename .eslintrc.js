@@ -6,6 +6,7 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'plugin:prettier/recommended',
+    'plugin:@typescript-eslint/recommended',
     'standard',
     'prettier',
   ],
@@ -15,6 +16,7 @@ module.exports = {
       jsx: true,
     },
     ecmaVersion: 'latest',
+    sourceType: 'module',
   },
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {

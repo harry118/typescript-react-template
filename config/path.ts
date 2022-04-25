@@ -1,15 +1,16 @@
-import * as fs from "fs";
-import * as path from "path";
+import * as fs from 'fs';
+import * as path from 'path';
 
 export const ROOT = fs.realpathSync(process.cwd());
 const relativePath = (relativePath: string) => path.resolve(ROOT, relativePath);
 
-export const APP_PATH = relativePath("src");
-export const BUILD_PATH = relativePath("dist");
-export const PUBLIC_FOLDER = relativePath("public");
-export const TEMPLATE_FILE = relativePath("public/index.html");
-export const TS_CONFIG = relativePath("tsconfig.json");
-export const TS_LINT_CONFIG = relativePath("tslint.json");
+export const appSrc = relativePath('src');
+export const appBuild = relativePath('dist');
+export const appPublic = relativePath('public');
+export const appHtml = relativePath('public/index.html');
+export const appTsconfig = relativePath('tsconfig.json');
+export const appTslint = relativePath('tslint.json');
+export const appNodeModules = relativePath('node_modules');
 
 export const relativePathToAsset = (p: string) =>
   path.relative(p, `${ROOT}/src/assets`);
