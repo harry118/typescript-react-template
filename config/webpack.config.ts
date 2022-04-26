@@ -18,8 +18,6 @@ export default (env: Env): webpack.Configuration => {
   const envVar = genEnv(env);
   const { PUBLIC_URL } = envVar;
   const isDevelopment = envVar.NODE_ENV === 'development';
-  console.log('process.env.NODE_ENV', process.env.NODE_ENV);
-  // console.log('process.env', process.env);
   // 处理环境变量
   const DefinedEnvs = Object.entries(envVar).reduce(
     (map, [key, value]) =>

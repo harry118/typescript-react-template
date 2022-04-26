@@ -9,6 +9,7 @@ import webpackDevServerConfig from '../config/webpackDevServerConfig';
 
 // default local env
 const { HOST, PORT } = genEnv('local');
+
 const compiler = webpack(webpackConfig('local') as any) as any;
 const server = new wds(webpackDevServerConfig, compiler);
 
@@ -30,12 +31,3 @@ server.start().then(
     console.error(err);
   }
 );
-
-// process.on("SIGINT", () => {
-//   server.close();
-//   process.exit();
-// });
-// process.on("SIGTERM", () => {
-//   server.close();
-//   process.exit();
-// });

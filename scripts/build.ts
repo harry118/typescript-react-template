@@ -40,47 +40,77 @@ const runBuild = (env: Env) =>
   });
 
 rimraf(`${appBuild}/*`, async () => {
-  const start = Date.now();
-  const envs = ENV.slice();
-  const total = envs.length;
-  let env = envs.shift();
-
-  while (env) {
-    envLog(`\nBuild ${env}\n`);
-    await runBuild(env)
-      .then((stats) => {
-        const info = stats.toJson();
-        if (stats.hasErrors()) {
-          console.warn(info.errors);
-        }
-        console.log(
-          stats.toString({
-            assets: true,
-            builtAt: true,
-            colors: true,
-            entrypoints: false,
-            errors: false,
-            hash: false,
-            modules: false,
-            performance: false,
-          })
-        );
-      })
-      .catch((e) => {
-        console.log(e);
-        process.exit(1);
-      });
-
-    // copy public files
-    fs.copySync(appPublic, `${appBuild}`, {
-      dereference: true,
-      filter: (file) => ![appHtml].includes(file),
+  await runBuild(process.env.ENV as Env)
+    .then((stats) => {
+      const info = stats.toJson();
+      if (stats.hasErrors()) {
+        console.warn(info.errors);
+      }
+      console.log(
+        stats.toString({
+          assets: true,
+          builtAt: true,
+          colors: true,
+          entrypoints: false,
+          errors: false,
+          hash: false,
+          modules: false,
+          performance: false,
+        })
+      );
+    })
+    .catch((e) => {
+      console.log(e);
+      process.exit(1);
     });
-    env = envs.shift();
-  }
 
-  const spend = (Date.now() - start) / 1000;
-  envLog(`\nBuild done\n`);
-  envLog(`Total build time: ${spend} seconds.`);
-  envLog(`Average build time: ${spend / total} seconds.`);
+  // copy public files
+  fs.copySync(appPublic, `${appBuild}`, {
+    dereference: true,
+    filter: (file) => ![appHtml].includes(file),
+  });
+
+  // const start = Date.now();
+  // const envs = ENV.slice();
+  // const total = envs.length;
+  // let env = envs.shift();
+
+  // while (env) {
+  //   envLog(`\nBuild ${env}\n`);
+  //   await runBuild(env)
+  //     .then((stats) => {
+  //       const info = stats.toJson();
+  //       if (stats.hasErrors()) {
+  //         console.warn(info.errors);
+  //       }
+  //       console.log(
+  //         stats.toString({
+  //           assets: true,
+  //           builtAt: true,
+  //           colors: true,
+  //           entrypoints: false,
+  //           errors: false,
+  //           hash: false,
+  //           modules: false,
+  //           performance: false,
+  //         })
+  //       );
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //       process.exit(1);
+  //     });
+
+  //   // copy public files
+  //   fs.copySync(appPublic, `${appBuild}`, {
+  //     dereference: true,
+  //     filter: (file) => ![appHtml].includes(file),
+  //   });
+  //   env = envs.shift();
+  // }
+
+  // const spend = (Date.now() - start) / 1000;
+  // envLog(`\nBuild done\n`);
+  // envLog(`Total build time: ${spend} seconds.`);
+  // envLog(`Average build time: ${spend / total} seconds.`);
 });

@@ -6,3 +6,4 @@ public/*
 src/__tests__
 src/types
 src/*.d.ts
+src/dist
