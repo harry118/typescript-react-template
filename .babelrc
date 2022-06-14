@@ -1,4 +1,5 @@
 {
+  "plugins": [["import", { "libraryName": "antd", "style": true }, "antd"]],
   "presets": [
     [
       "@babel/preset-env",

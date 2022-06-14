@@ -46,6 +46,9 @@ export default (env: Env): webpack.Configuration => {
         runtime: 'runtime',
       },
     },
+    performance: {
+      hints: false,
+    },
     output: {
       filename: 'static/js/[name].[fullhash].js',
       chunkFilename: 'static/js/[name].[fullhash].chunk.js',
@@ -54,6 +57,16 @@ export default (env: Env): webpack.Configuration => {
     },
     optimization: {
       minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
+      splitChunks: {
+        chunks: 'all',
+        // cacheGroups: {
+        //   react: {
+        //     name: 'react',
+        //     test: /react/,
+        //     priority: 1,
+        //   },
+        // },
+      },
     },
     module: {
       generator: {},
@@ -63,6 +76,11 @@ export default (env: Env): webpack.Configuration => {
         {
           test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/,
           type: 'asset/resource',
+          parser: {
+            dataUrlCondition: {
+              maxSize: 4 * 1024, // 4kb
+            },
+          },
           generator: {
             filename: 'static/assets/[hash][ext][query]',
           },
@@ -92,10 +110,7 @@ export default (env: Env): webpack.Configuration => {
                   options: {},
                 },
               ]
-            : [
-                MiniCssExtractPlugin.loader,
-                'cache-loader' as webpack.RuleSetUseItem,
-              ]
+            : [MiniCssExtractPlugin.loader as webpack.RuleSetUseItem]
           ).concat([
             {
               loader: 'css-loader',
@@ -119,6 +134,7 @@ export default (env: Env): webpack.Configuration => {
     },
     plugins: [
       // new LodashModuleReplacementPlugin(),
+      new MiniCssExtractPlugin(),
       new HtmlWebpackPlugin({
         ENABLE_APM: process.env.__ENABLE_APM__ === 'true',
         PUBLIC_URL,

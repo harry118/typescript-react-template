@@ -1,25 +1,42 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  RouteObject,
+  useRoutes,
+} from 'react-router-dom';
 
 import Home from '@pages/Home';
-import About from '@pages/About';
+import User from '@pages/Auth/User';
+import Role from '@pages/Auth/Role';
+import Login from '@pages/Login';
+import MainLayout from '@layout/MainLayout';
 
-import png from '@assets/shop.png';
+// import png from '@assets/shop.png';
 import '@utils/index';
+import './App.less';
 
 interface IAppProps {
   test?: string;
 }
 const App: React.FC<IAppProps> = () => {
-  return (
-    <BrowserRouter>
-      <img src={png} alt="png" />
-      <p>react app</p>
-      <Routes>
-        <Route path={`/`} element={<Home />}></Route>
-        <Route path={`/about`} element={<About />}></Route>
-      </Routes>
-    </BrowserRouter>
-  );
+  const routes: RouteObject[] = [
+    {
+      path: '/',
+      element: <MainLayout />,
+      children: [
+        { index: true, element: <Home /> },
+        { path: '/auth/user', element: <User /> },
+        { path: '/auth/role', element: <Role /> },
+      ],
+    },
+    {
+      path: '/login',
+      element: <Login />,
+    },
+  ];
+  const element = useRoutes(routes);
+  return <>{element}</>;
 };
 export default App;
