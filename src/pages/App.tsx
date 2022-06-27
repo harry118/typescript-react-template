@@ -6,6 +6,7 @@ import {
   RouteObject,
   useRoutes,
 } from 'react-router-dom';
+import { ConfigProvider } from 'antd';
 
 import Home from '@pages/Home';
 import User from '@pages/Auth/User';
@@ -37,6 +38,6 @@ const App: React.FC<IAppProps> = () => {
     },
   ];
   const element = useRoutes(routes);
-  return <>{element}</>;
+  return <ConfigProvider componentSize="small">{element}</ConfigProvider>;
 };
 export default App;

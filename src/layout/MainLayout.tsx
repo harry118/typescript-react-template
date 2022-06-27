@@ -3,9 +3,10 @@ import { Outlet } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import SideBar from './SideBar';
+import FooterBar from './FooterBar';
 import './MainLayout.less';
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content } = Layout;
 const MainLayout: React.FC = () => {
   return (
     <Layout hasSider className="main">
@@ -23,9 +24,7 @@ const MainLayout: React.FC = () => {
             <Outlet />
           </div>
         </Content>
-        <Footer className="main_footer" style={{ textAlign: 'center' }}>
-          typescript-react-template ©2022 Created by 君铉
-        </Footer>
+        <FooterBar />
       </Layout>
     </Layout>
   );

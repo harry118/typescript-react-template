@@ -11,6 +11,7 @@ import LodashModuleReplacementPlugin from 'lodash-webpack-plugin';
 
 import { appBuild, appHtml, appSrc, appTsconfig } from './path';
 import genEnv, { Env } from './env';
+import theme from './theme';
 
 const { DefinePlugin, IgnorePlugin, ProgressPlugin } = webpack;
 
@@ -123,7 +124,7 @@ export default (env: Env): webpack.Configuration => {
               options: {
                 lessOptions: {
                   // 如果使用less-loader@5，请移除 lessOptions 这一级直接配置选项。
-                  // modifyVars: theme,
+                  modifyVars: theme,
                   javascriptEnabled: true,
                 },
               },
