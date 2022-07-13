@@ -4,15 +4,18 @@ import { Layout } from 'antd';
 
 import SideBar from './SideBar';
 import FooterBar from './FooterBar';
+import HeaderBar from './HeaderBar';
+
 import './MainLayout.less';
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 const MainLayout: React.FC = () => {
   return (
     <Layout hasSider className="main">
       <SideBar />
       <Layout className="site-layout" style={{ marginLeft: 200 }}>
-        <Header className="main_header" style={{ padding: 0 }} />
+        {/* <Header className="main_header"></Header> */}
+        <HeaderBar />
         <Content
           className="main_content"
           style={{ margin: '24px 16px 0', overflow: 'initial' }}

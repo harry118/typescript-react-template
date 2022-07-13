@@ -71,3 +71,11 @@ declare module '*.module.sass' {
   const classes: { readonly [key: string]: string };
   export default classes;
 }
+
+export interface IApiResponse<T> {
+  code: number;
+  data: T;
+  extra: {};
+  message: string;
+  success: boolean;
+}

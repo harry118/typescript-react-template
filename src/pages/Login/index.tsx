@@ -1,11 +1,24 @@
 import React from 'react';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
+import { login } from './service';
+
 interface ILoginProps {
   test?: string;
 }
 const Login: React.FC<ILoginProps> = () => {
-  const onFinish = (values: unknown) => {
+  const navigate = useNavigate();
+
+  const onFinish = async (values: unknown) => {
     console.log('Success:', values);
+    const result = await login(values);
+    // eslint-disable-next-line no-debugger
+    debugger;
+    if (result.success) {
+      navigate('/', { replace: true });
+    }
+    console.log('result', result);
   };
 
   const onFinishFailed = (errorInfo: unknown) => {
@@ -36,14 +49,6 @@ const Login: React.FC<ILoginProps> = () => {
           rules={[{ required: true, message: '请输入密码' }]}
         >
           <Input.Password />
-        </Form.Item>
-
-        <Form.Item
-          name="remember"
-          valuePropName="checked"
-          wrapperCol={{ offset: 8, span: 16 }}
-        >
-          <Checkbox>Remember me</Checkbox>
         </Form.Item>
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
