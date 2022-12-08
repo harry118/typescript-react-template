@@ -22,5 +22,7 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     'no-unused-vars': 'warn',
+    'no-debugger': 0,
+    // 'quotest':[]
   },
 };

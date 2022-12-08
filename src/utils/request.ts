@@ -1,5 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { IApiResponse } from '@/index.d';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:3000',
@@ -10,6 +12,9 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   function (config: AxiosRequestConfig) {
     // 在发送请求之前做些什么
+    config.headers = {
+      token: Cookies.get('token'),
+    };
     return config;
   },
   function (error) {
@@ -28,6 +33,18 @@ axiosInstance.interceptors.response.use(
   // 超出 2xx 范围的状态码都会触发该函数。
   // 对响应错误做点什么
   function (error) {
+    console.error(error);
+    const navigate = useNavigate();
+    const status = error.status;
+    switch (status) {
+      case 401:
+        debugger;
+        navigate('/login');
+        break;
+
+      default:
+        break;
+    }
     return Promise.reject(error);
   }
 );

@@ -14,7 +14,6 @@ const MainLayout: React.FC = () => {
     <Layout hasSider className="main">
       <SideBar />
       <Layout className="site-layout" style={{ marginLeft: 200 }}>
-        {/* <Header className="main_header"></Header> */}
         <HeaderBar />
         <Content
           className="main_content"

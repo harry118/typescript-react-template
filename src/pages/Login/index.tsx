@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 import { login } from './service';
 
@@ -14,8 +15,9 @@ const Login: React.FC<ILoginProps> = () => {
     console.log('Success:', values);
     const result = await login(values);
     // eslint-disable-next-line no-debugger
-    debugger;
+    // debugger;
     if (result.success) {
+      Cookies.set('token', result.data.token);
       navigate('/', { replace: true });
     }
     console.log('result', result);

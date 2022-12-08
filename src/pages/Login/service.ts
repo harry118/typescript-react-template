@@ -1,6 +1,5 @@
 import request from '@utils/request';
 
-import { IApiResponse } from '@/index.d';
 export interface ILogin {
   token: string;
 }

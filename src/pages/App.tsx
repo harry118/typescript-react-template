@@ -7,6 +7,7 @@ import {
   useRoutes,
 } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 import Home from '@pages/Home';
 import User from '@pages/Auth/User';
@@ -21,6 +22,8 @@ import './App.less';
 interface IAppProps {
   test?: string;
 }
+// Create a client
+const queryClient = new QueryClient();
 const App: React.FC<IAppProps> = () => {
   const routes: RouteObject[] = [
     {
@@ -38,6 +41,10 @@ const App: React.FC<IAppProps> = () => {
     },
   ];
   const element = useRoutes(routes);
-  return <ConfigProvider componentSize="small">{element}</ConfigProvider>;
+  return (
+    <ConfigProvider componentSize="small">
+      <QueryClientProvider client={queryClient}>{element}</QueryClientProvider>
+    </ConfigProvider>
+  );
 };
 export default App;
